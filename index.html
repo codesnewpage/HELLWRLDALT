@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>hola fuckers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0710;
+    --bg2:#1a0f2b;
+    --purple:#8b5cf6;
+    --purple-dark:#4b2e83;
+    --body-fill:#6b3fa0;
+    --head-fill:#7c4dbd;
+    --pink:#ff2d6d;
+    --text:#f3ecff;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;
+    height:100%;
+    overflow:hidden;
+    background:var(--bg);
+  }
+  body{
+    background:radial-gradient(circle at 50% 32%, var(--bg2), var(--bg) 72%);
+    font-family:'Poppins',sans-serif;
+    color:var(--text);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    text-align:center;
+    padding:calc(24px + env(safe-area-inset-top,0px)) 20px calc(24px + env(safe-area-inset-bottom,0px));
+  }
+  .stage{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:5.2rem;
+    width:100%;
+  }
+  h1{
+    font-family:'Metal Mania',cursive;
+    font-weight:400;
+    font-size:clamp(2.1rem,10vw,4.3rem);
+    color:var(--pink);
+    text-shadow:0 0 12px rgba(255,45,109,.8), 0 0 34px rgba(139,92,246,.55), 0 0 70px rgba(75,46,131,.5);
+    margin:0;
+    letter-spacing:1px;
+    line-height:1.15;
+    position:absolute;
+    opacity:0;
+    transform:scale(.85);
+    transition:opacity .5s ease, transform .5s ease;
+    pointer-events:none;
+  }
+  h1.flicker{ animation:flicker 5s infinite ease-in-out; }
+  .stage.said h1{ opacity:1; transform:scale(1); }
+  .greet-btn{
+    font-family:'Metal Mania',cursive;
+    font-size:1.35rem;
+    letter-spacing:1px;
+    color:var(--pink);
+    background:rgba(139,92,246,.12);
+    border:2px solid var(--purple);
+    border-radius:10px;
+    padding:.7rem 1.9rem;
+    cursor:pointer;
+    box-shadow:0 0 16px rgba(139,92,246,.45);
+    -webkit-tap-highlight-color:transparent;
+    transition:opacity .4s ease, transform .4s ease, box-shadow .4s ease;
+  }
+  .greet-btn:active{ transform:scale(.95); box-shadow:0 0 22px rgba(255,45,109,.55); }
+  .stage.said .greet-btn{ opacity:0; transform:scale(.85); pointer-events:none; }
+  @keyframes flicker{
+    0%,18%,22%,25%,53%,57%,100%{ opacity:1; }
+    20%,24%,55%{ opacity:.5; }
+  }
+  .web{ position:absolute; width:26vw; max-width:140px; opacity:.18; }
+  .web.tl{ top:0; left:0; }
+  .web.tr{ top:0; right:0; transform:scaleX(-1); }
+  .spider{
+    position:absolute;
+    left:0;
+    width:58px;
+    filter:drop-shadow(0 4px 10px rgba(0,0,0,.5));
+    animation-name:crawl;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+  }
+  .spider.s1{ bottom:26%; animation-duration:10s; }
+  .spider.s2{ bottom:15%; width:44px; opacity:.85; animation-duration:13s; animation-delay:-4s; }
+  .spider.s3{ bottom:6%;  width:34px; opacity:.7;  animation-duration:8s;  animation-delay:-2.5s; }
+  @keyframes crawl{
+    0%   { transform:translateX(-15vw) scaleX(1); }
+    47%  { transform:translateX(108vw) scaleX(1); }
+    50%  { transform:translateX(108vw) scaleX(-1); }
+    97%  { transform:translateX(-15vw) scaleX(-1); }
+    100% { transform:translateX(-15vw) scaleX(1); }
+  }
+  .leg{ transform-origin:50% 15%; animation:wiggleA .45s ease-in-out infinite alternate; }
+  .leg2{ transform-origin:50% 15%; animation:wiggleB .45s ease-in-out infinite alternate; }
+  @keyframes wiggleA{ from{ transform:rotate(-8deg);} to{ transform:rotate(4deg);} }
+  @keyframes wiggleB{ from{ transform:rotate(8deg);} to{ transform:rotate(-4deg);} }
+  .heart{ animation:pulse 1.1s ease-in-out infinite; transform-origin:50% 55%; }
+  @keyframes pulse{ 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.16);} }
+  @media (max-width:380px){
+    .spider.s1{ width:46px; }
+    .spider.s2{ width:36px; }
+    .spider.s3{ width:28px; }
+  }
+</style>
+</head>
+<body>
+
+  <svg class="web tl" viewBox="0 0 100 100" aria-hidden="true">
+    <path d="M0,0 L100,100 M0,25 Q25,25 25,0 M0,50 Q50,50 50,0 M0,75 Q75,75 75,0" stroke="#c9b6ff" fill="none" stroke-width="1"/>
+  </svg>
+  <svg class="web tr" viewBox="0 0 100 100" aria-hidden="true">
+    <path d="M0,0 L100,100 M0,25 Q25,25 25,0 M0,50 Q50,50 50,0 M0,75 Q75,75 75,0" stroke="#c9b6ff" fill="none" stroke-width="1"/>
+  </svg>
+
+  <div class="stage">
+    <button id="greetBtn" class="greet-btn" type="button">saluda</button>
+    <h1 id="greeting" aria-live="polite">hola fuckers</h1>
+  </div>
+
+  <svg class="spider s1" viewBox="0 0 100 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="var(--purple-dark)" stroke-width="3.2" fill="none" stroke-linecap="round">
+      <path class="leg"  d="M35 34 L14 14"/>
+      <path class="leg2" d="M34 40 L8 40"/>
+      <path class="leg"  d="M35 46 L14 64"/>
+      <path class="leg2" d="M65 34 L86 14"/>
+      <path class="leg"  d="M66 40 L92 40"/>
+      <path class="leg2" d="M65 46 L86 64"/>
+    </g>
+    <ellipse cx="50" cy="43" rx="21" ry="17" fill="var(--body-fill)"/>
+    <circle cx="50" cy="23" r="13.5" fill="var(--head-fill)"/>
+    <path d="M39 12 L36 4 M45.5 9.5 L44.5 1.5 M54.5 9.5 L55.5 1.5 M61 12 L64 4"
+          stroke="var(--purple-dark)" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="44.5" cy="22.5" r="3.4" fill="#fff"/>
+    <circle cx="55.5" cy="22.5" r="3.4" fill="#fff"/>
+    <circle cx="44.5" cy="23.5" r="1.7" fill="#160d24"/>
+    <circle cx="55.5" cy="23.5" r="1.7" fill="#160d24"/>
+    <path class="heart" fill="var(--pink)"
+          d="M50 54 C45.5 47.5 32 49.5 32 59 C32 68 50 76 50 76 C50 76 68 68 68 59 C68 49.5 54.5 47.5 50 54 Z"/>
+  </svg>
+
+  <svg class="spider s2" viewBox="0 0 100 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="var(--purple-dark)" stroke-width="3.2" fill="none" stroke-linecap="round">
+      <path class="leg"  d="M35 34 L14 14"/>
+      <path class="leg2" d="M34 40 L8 40"/>
+      <path class="leg"  d="M35 46 L14 64"/>
+      <path class="leg2" d="M65 34 L86 14"/>
+      <path class="leg"  d="M66 40 L92 40"/>
+      <path class="leg2" d="M65 46 L86 64"/>
+    </g>
+    <ellipse cx="50" cy="43" rx="21" ry="17" fill="var(--body-fill)"/>
+    <circle cx="50" cy="23" r="13.5" fill="var(--head-fill)"/>
+    <path d="M39 12 L36 4 M45.5 9.5 L44.5 1.5 M54.5 9.5 L55.5 1.5 M61 12 L64 4"
+          stroke="var(--purple-dark)" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="44.5" cy="22.5" r="3.4" fill="#fff"/>
+    <circle cx="55.5" cy="22.5" r="3.4" fill="#fff"/>
+    <circle cx="44.5" cy="23.5" r="1.7" fill="#160d24"/>
+    <circle cx="55.5" cy="23.5" r="1.7" fill="#160d24"/>
+    <path class="heart" fill="var(--pink)"
+          d="M50 54 C45.5 47.5 32 49.5 32 59 C32 68 50 76 50 76 C50 76 68 68 68 59 C68 49.5 54.5 47.5 50 54 Z"/>
+  </svg>
+
+  <svg class="spider s3" viewBox="0 0 100 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="var(--purple-dark)" stroke-width="3.2" fill="none" stroke-linecap="round">
+      <path class="leg"  d="M35 34 L14 14"/>
+      <path class="leg2" d="M34 40 L8 40"/>
+      <path class="leg"  d="M35 46 L14 64"/>
+      <path class="leg2" d="M65 34 L86 14"/>
+      <path class="leg"  d="M66 40 L92 40"/>
+      <path class="leg2" d="M65 46 L86 64"/>
+    </g>
+    <ellipse cx="50" cy="43" rx="21" ry="17" fill="var(--body-fill)"/>
+    <circle cx="50" cy="23" r="13.5" fill="var(--head-fill)"/>
+    <path d="M39 12 L36 4 M45.5 9.5 L44.5 1.5 M54.5 9.5 L55.5 1.5 M61 12 L64 4"
+          stroke="var(--purple-dark)" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="44.5" cy="22.5" r="3.4" fill="#fff"/>
+    <circle cx="55.5" cy="22.5" r="3.4" fill="#fff"/>
+    <circle cx="44.5" cy="23.5" r="1.7" fill="#160d24"/>
+    <circle cx="55.5" cy="23.5" r="1.7" fill="#160d24"/>
+    <path class="heart" fill="var(--pink)"
+          d="M50 54 C45.5 47.5 32 49.5 32 59 C32 68 50 76 50 76 C50 76 68 68 68 59 C68 49.5 54.5 47.5 50 54 Z"/>
+  </svg>
+
+  <script>
+    var stage = document.querySelector('.stage');
+    var greeting = document.getElementById('greeting');
+    document.getElementById('greetBtn').addEventListener('click', function(){
+      stage.classList.add('said');
+      setTimeout(function(){ greeting.classList.add('flicker'); }, 550);
+    });
+  </script>
+
+</body>
+</html>
